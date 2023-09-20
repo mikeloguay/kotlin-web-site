@@ -36,12 +36,13 @@ plugins {
 `kotlin` is the top-level block for multiplatform project configuration in the Gradle build script.
 Inside `kotlin`, you can write the following blocks:
 
-| **Block**        | **Description**                                                                                                          |
-|------------------|--------------------------------------------------------------------------------------------------------------------------|
-| _\<targetName\>_ | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section. |
-| `targets`        | All targets of the project.                                                                                              |
-| `presets`        | All predefined targets. Use this for [configuring multiple predefined targets](#targets) at once.                        |
-| `sourceSets`     | Configures predefined and declares custom [source sets](#source-sets) of the project.                                    |
+| **Block**         | **Description**                                                                                                                                                                         |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| _\<targetName\>_  | Declares a particular target of a project. The names of available targets are listed in the [Targets](#targets) section.                                                                |
+| `targets`         | All targets of the project.                                                                                                                                                             |
+| `presets`         | All predefined targets. Use this for [configuring multiple predefined targets](#targets) at once.                                                                                       |
+| `sourceSets`      | Configures predefined and declares custom [source sets](#source-sets) of the project.                                                                                                   |
+| `compilerOptions` | Configures [compiler options](gradle-compiler-options.md) for all targets in the project. (This is [Experimental](components-stability.md#stability-levels-explained) in Kotlin 1.9.20) |
 
 ## Targets
 
@@ -118,13 +119,14 @@ Each target can have one or more [compilations](#compilations).
 
 In any target block, you can use the following declarations:
 
-| **Name**            | **Description**                                                                                                                                   | 
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
-| `attributes`        | Attributes used for [disambiguating targets](multiplatform-set-up-targets.md#distinguish-several-targets-for-one-platform) for a single platform. |
-| `preset`            | The preset that the target has been created from, if any.                                                                                         |
-| `platformType`      | Designates the Kotlin platform of this target. Available values: `jvm`, `androidJvm`, `js`, `native`, `common`.                                   |
-| `artifactsTaskName` | The name of the task that builds the resulting artifacts of this target.                                                                          |
-| `components`        | The components used to setup Gradle publications.                                                                                                 |
+| **Name**            | **Description**                                                                                                                                                                                                                                                                                    | 
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `attributes`        | Attributes used for [disambiguating targets](multiplatform-set-up-targets.md#distinguish-several-targets-for-one-platform) for a single platform.                                                                                                                                                  |
+| `preset`            | The preset that the target has been created from, if any.                                                                                                                                                                                                                                          |
+| `platformType`      | Designates the Kotlin platform of this target. Available values: `jvm`, `androidJvm`, `js`, `native`, `common`.                                                                                                                                                                                    |
+| `artifactsTaskName` | The name of the task that builds the resulting artifacts of this target.                                                                                                                                                                                                                           |
+| `components`        | The components used to setup Gradle publications.                                                                                                                                                                                                                                                  |
+| `compilerOptions`   | The [compiler options](gradle-compiler-options.md) used for the target. This declaration overrides any `compilerOptions` configured at [top level](multiplatform-dsl-reference.md#top-level-blocks). (This is [Experimental](components-stability.md#stability-levels-explained) in Kotlin 1.9.20) |
 
 ### JVM targets
 
@@ -676,18 +678,18 @@ kotlin {
 
 A compilation has the following parameters:
 
-| **Name**                 | **Description**                                                                                                                     | 
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| `defaultSourceSet`       | The compilation's default source set.                                                                                               |
-| `kotlinSourceSets`       | Source sets participating in the compilation.                                                                                       |
-| `allKotlinSourceSets`    | Source sets participating in the compilation and their connections via `dependsOn()`.                                               |
+| **Name**                 | **Description**                                                                                                                                | 
+|--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
+| `defaultSourceSet`       | The compilation's default source set.                                                                                                          |
+| `kotlinSourceSets`       | Source sets participating in the compilation.                                                                                                  |
+| `allKotlinSourceSets`    | Source sets participating in the compilation and their connections via `dependsOn()`.                                                          |
 | `compilerOptions`        | Compiler options applied to the compilation. For the list of available options, see [Compiler options](gradle-compiler-options.md). |
-| `compileKotlinTask`      | Gradle task for compiling Kotlin sources.                                                                                           |
-| `compileKotlinTaskName`  | Name of `compileKotlinTask`.                                                                                                        |
-| `compileAllTaskName`     | Name of the Gradle task for compiling all sources of a compilation.                                                                 |
-| `output`                 | The compilation output.                                                                                                             |
-| `compileDependencyFiles` | Compile-time dependency files (classpath) of the compilation.                                                                       |
-| `runtimeDependencyFiles` | Runtime dependency files (classpath) of the compilation.                                                                            |
+| `compileKotlinTask`      | Gradle task for compiling Kotlin sources.                                                                                                      |
+| `compileKotlinTaskName`  | Name of `compileKotlinTask`.                                                                                                                   |
+| `compileAllTaskName`     | Name of the Gradle task for compiling all sources of a compilation.                                                                            |
+| `output`                 | The compilation output.                                                                                                                        |
+| `compileDependencyFiles` | Compile-time dependency files (classpath) of the compilation.                                                                                  |
+| `runtimeDependencyFiles` | Runtime dependency files (classpath) of the compilation.                                                                                       |
 
 <tabs group="build-script">
 <tab title="Kotlin" group-key="kotlin">
